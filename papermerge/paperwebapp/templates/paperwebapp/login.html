@@ -1,0 +1,16 @@
+{% extends 'paperwebapp/main.html' %}
+{% block title %}Login{% endblock title %}
+
+
+{% block body %}
+
+<div class="container my-4">
+    <form action="" method="post">{% csrf_token %}
+        {% for log in login %}
+        {{log}}
+        {% endfor %}        
+        <button type="submit" class="btn btn-primary">Login</button>        
+    </form>
+</div>
+
+{% endblock body %}

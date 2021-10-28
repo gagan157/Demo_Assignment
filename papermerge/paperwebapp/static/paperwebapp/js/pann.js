@@ -17,9 +17,9 @@ if(localStorage.getItem('cart')==null){
     var cart=[]
 }
 else{
-    cart = JSON.parse(localStorage.getItem('cart')) || []
+    cart = JSON.parse(localStorage.getItem('cart'))
     showbook(cart)
-    showdata(cart)
+    // showdata(cart)
 }
 
 
@@ -55,11 +55,12 @@ function addo() {
     showdata(cart)
 }
 
+// icon show off and on
 function showbook(cart) {
     cart.forEach(function(element) {
+    
         
-        for(key in element){
-           
+            
             if(cart != null){
                 document.getElementById(`a${element['id']}`).setAttribute('class','btn btn-default d-none')
                 document.getElementById(`r${element['id']}`).setAttribute('class','btn btn-default')
@@ -70,25 +71,26 @@ function showbook(cart) {
                 document.getElementById(`r${element['id']}`).setAttribute('class','btn btn-default d-none')
                 
             }
-        }
+        
+        
     })
-    // addo()
     
+    showdata(cart)
 }
 
 function showdata(cart) {
    let cl = document.getElementById('collapseExample')
-//    console.log(cl)
-
    var html=''
    cart.forEach(function(element,index) {
         html+=`
         <div class="card card-body" id="">
         <a href="${element['img']}">${element['name']}</a>      
         </div>`
-        
-  
-    cl.innerHTML= html
+   
 })
-  
+
+cl.innerHTML = html
+
+
+
 }

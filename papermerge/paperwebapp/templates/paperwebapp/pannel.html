@@ -4,31 +4,87 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'paperwebapp/css/pannel.css' %}">
+<link rel="stylesheet" href="{% static 'paperwebapp/css/layout.css' %}">
 {% endblock css %}
 
 {% block body %}
 {% load static %}
-<div class="container my-3">
-    <ul class="nav nav-pills navu">        
-        <li class="nav-item dropdown">
-          {% if request.user.is_authenticated %}          
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hello {{request.user.username}}</a>
-          <ul class="dropdown-menu">           
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>          
-          </ul>
-          {% else %}
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hello Guest</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>                
-          </ul>
-          {% endif %}
-        </li>
-        
-      </ul>
-</div>
-{% if request.user.is_authenticated %}
-<div class="container myform allcenter my-3">
-<form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}   
+
+<div class="container-fluid con">
+  <div class="lay lay-1">
+    <div class="mt-3 txtcenter">
+      <h4>Papermerge</h4>
+    </div>
+    <hr>
+    
+  </div>
+
+  <div class="lay lay-2">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <button type="submit" class="btn btn-default d-none"><h3><i class="bi bi-layout-sidebar-inset-reverse"></i></h3></button>
+        <button type="submit" class="btn btn-default"><h3><i class="bi bi-layout-sidebar-inset"></i></h3></button>
+      </li>
+      <li class="nav-item">
+        <div class="container my-3 allcenter">
+          <form action="{% url 'admin' %}" method="get">
+            
+            <input type="text" name='search' placeholder="Search">
+            <button class="" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </li>
+      <li class="nav-item" id="logleft">
+        <div class="container my-3">
+          <ul class="nav nav-pills navu">        
+              <li class="nav-item dropdown">
+                {% if request.user.is_authenticated %}          
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hello {{request.user.username}}</a>
+                <ul class="dropdown-menu">           
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>          
+                </ul>
+                {% else %}
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hello Guest</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li> 
+                  <li><button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Demo Login
+                  </button> </li>          
+                </ul>
+                {% endif %}
+              </li>          
+            </ul>
+      </div>
+      </li>
+     
+    </ul>
+    <div class="mx-3">
+      
+      <a href="/" type="button" class="btn btn-default"><h5><i class="bi bi-house-door-fill"></i> <span>Home</span></h5></a>
+       
+      
+      
+      
+    </div>
+    
+    
+     
+   
+    
+    
+    
+    
+    
+  </div>
+
+  <div class="lay lay-3">
+    {% if request.user.is_authenticated %}
+    <div class="container myform allcenter my-3">
+    <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}   
     {% for fm in form %}
     {{fm}}
     {% endfor %}
@@ -37,42 +93,23 @@
 </div>
 {% endif %}
 
-
-<div class="container allcenter">
-  <form action="{% url 'admin' %}" method="get">
-    <input type="text" name='search' placeholder="Search">
-    <button type="submit">Search</button>
-  </form>
-</div>
-<div class="container" >
-  <p>
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      BookMark
-    </a>
-  </p>
-  <div class="collapse" id="collapseExample">
-    
-    
-  
-  </div>
-</div>
-
-<div class="container allcenter my-4">
+  <div class="container allcenter my-4">
     <div class="row my-3">
     {% for file in files %}
         
           <div class="col">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 10rem;">
                 <div class="btncart">
-                  
+                                
                   <button id="a{{file.id}}" type="submit" class="btn btn-default"><h4><i id="ia{{file.id}}" class="bi bi-bookmark-star"></i></h4></button>
                   
-
-                 
                   <button id="r{{file.id}}" type="submit" class="btn btn-default d-none"><h4><i id="ir{{file.id}}" class="bi bi-bookmark-star-fill"></i></h4></button>
-                 
+                
+                {% if request.user.is_authenticated %}
+                  <button class="btn btn-default" type="submit"><i class="bi bi-x-circle-fill"></i></button>
+                
+                {% endif %}
                 </div>
-               
                 <img  src="{% static 'paperwebapp/image/file.png' %}" class="card-img-top allimg" alt="...">
                 <div class="card-body">
                   <h5 id="n{{file.id}}" class="card-title">{{file.Name}}</h5>
@@ -83,14 +120,69 @@
                 
               </div>
           </div>
-        {% if forloop.counter|divisibleby:3 %}
+        {% if forloop.counter|divisibleby:4 %}
         <div class="row my-3"></div>
         {% endif %}
         
     {% endfor %}
-</div>
+  </div>
+  </div>
 </div>
 
+  <div class="lay lay-4">4</div>
+
+  <div class="lay lay-5">
+    <div class="container txtcenter my-3" >
+      <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          BookMark
+        </a>
+      </p>
+      <div class="collapse" id="collapseExample">
+        
+        
+      
+      </div>
+    </div>
+  </div>
+  <div class="lay lay-6">6</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- Login Form -->
+
+
+<!-- Form -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock body %}
 {% block js %}
 <script src="{% static 'paperwebapp/js/pann.js' %}"></script>

@@ -11,19 +11,67 @@
 {% load static %}
 
 <div class="container-fluid con">
-  <div class="lay lay-1">
-    <div class="mt-3 txtcenter">
-      <h4>Papermerge</h4>
-    </div>
-    <hr>
+  
+  <div class="lay lay-1" id="sidehid"> 
     
+    <div class="d-flex flex-column flex-shrink-0 text-white bg-dark" id="nav1" style="width: 4.5rem;">
+      <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+        <i class="bi bi-building myicon"></i>
+        <!-- <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
+        <!-- <span class="visually-hidden">Icon-only</span> -->
+      </a>
+      <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+        <li class="nav-item">
+          <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+            <i class="bi bi-house-door myicon"></i>
+            <!-- <svg class="bi" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"></use></svg> -->
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+            <i class="bi bi-speedometer2 myicon"></i>
+            <!-- <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg> -->
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+            <i class="bi bi-tags myicon"></i>
+            <!-- <svg class="bi" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"></use></svg> -->
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+            <i class="bi bi-table myicon"></i>
+            <!-- <svg class="bi" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg> -->
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+            <i class="bi bi-person myicon"></i>
+            <!-- <svg class="bi" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg> -->
+          </a>
+        </li>
+      </ul>
+      <div class="dropdown border-top">
+        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+        </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <div class="lay lay-2">
+  <div class="lay lay-2" id="sideexp">
     <ul class="nav nav-pills">
       <li class="nav-item">
-        <button type="submit" class="btn btn-default d-none"><h3><i class="bi bi-layout-sidebar-inset-reverse"></i></h3></button>
-        <button type="submit" class="btn btn-default"><h3><i class="bi bi-layout-sidebar-inset"></i></h3></button>
+        <button type="submit" id="sbtnhide" class="btn btn-default"><h3><i class="bi bi-layout-sidebar-inset-reverse"></i></h3></button>
+        <button type="submit" id="sbtnshow" class="btn btn-default d-none"><h3><i class="bi bi-layout-sidebar-inset"></i></h3></button>
       </li>
       <li class="nav-item">
         <div class="container my-3 allcenter">
@@ -51,9 +99,9 @@
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hello Guest</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li> 
-                  <li><button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <li><a type="button" href="{% url 'login' %}"  class="btn btn-default" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Demo Login
-                  </button> </li>          
+                  </a> </li>          
                 </ul>
                 {% endif %}
               </li>          
@@ -64,7 +112,7 @@
     </ul>
     <div class="mx-3">
       
-      <a href="/" type="button" class="btn btn-default"><h5><i class="bi bi-house-door-fill"></i> <span>Home</span></h5></a>
+      <a href="/" type="button" class="btn btn-default"><h6><i class="bi bi-house-door-fill"></i> <span>Home</span></h6></a>
        
       
       
@@ -81,15 +129,15 @@
     
   </div>
 
-  <div class="lay lay-3">
+  <div class="lay lay-3" id="sideexp2">
     {% if request.user.is_authenticated %}
     <div class="container myform allcenter my-3">
-    <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}   
+  <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}   
     {% for fm in form %}
     {{fm}}
     {% endfor %}
     <button type="submit">Upload</button>    
-</form>
+  </form>
 </div>
 {% endif %}
 
@@ -99,26 +147,58 @@
         
           <div class="col">
             <div class="card" style="width: 10rem;">
-                <div class="btncart">
-                                
-                  <button id="a{{file.id}}" type="submit" class="btn btn-default"><h4><i id="ia{{file.id}}" class="bi bi-bookmark-star"></i></h4></button>
+                <div class="btncart">                                
+                  <button id="a{{file.id}}" type="button" class="btn btn-default"><h4><i id="ia{{file.id}}" class="bi bi-bookmark-star"></i></h4></button>
+                  
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                          <div id="liveToast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2000">
+                            <div class="toast-header">                              
+                              <strong class="me-auto">BookMark Add</strong>
+                              <small class="text-muted">Just Now</small>
+                              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                              Hello, BookMark Add Sucessfully!
+                            </div>
+                          </div>
+                        </div>
                   
                   <button id="r{{file.id}}" type="submit" class="btn btn-default d-none"><h4><i id="ir{{file.id}}" class="bi bi-bookmark-star-fill"></i></h4></button>
-                
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                          <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2000">
+                            <div class="toast-header">
+                              <img src="#" class="rounded me-2" alt="">
+                              <strong class="me-auto">BookMark Remove</strong>
+                              <small class="text-muted">Just Now</small>
+                              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                              Hello, BookMark Remove Sucessfully!
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
                 {% if request.user.is_authenticated %}
+                <form action="{% url 'del' file.id %}" method="post">{% csrf_token %}
                   <button class="btn btn-default" type="submit"><i class="bi bi-x-circle-fill"></i></button>
-                
+                </form>
                 {% endif %}
                 </div>
+               
+                <button type="submit"  class="btn btn-default getinfo" id="b{{file.id}}">
                 <img  src="{% static 'paperwebapp/image/file.png' %}" class="card-img-top allimg" alt="...">
                 <div class="card-body">
                   <h5 id="n{{file.id}}" class="card-title">{{file.Name}}</h5>
-                  <p class="card-text">{{file.UpTime}}</p>                                 
-                  <a id="i{{file.id}}" href="/media/{{file.Uploadfiles}}" class="btn btn-primary">View</a>
+                  <p class="card-text d-none">{{file.UpTime}}</p>                                               
                 </div>
-        
-                
+                </button>   
+                         
+                <a id="i{{file.id}}" href="/media/{{file.Uploadfiles}}" class="btn btn-default"><i class="bi bi-eye"></i></a>
               </div>
+            
           </div>
         {% if forloop.counter|divisibleby:4 %}
         <div class="row my-3"></div>
@@ -129,10 +209,25 @@
   </div>
 </div>
 
-  <div class="lay lay-4">4</div>
+  <div class="lay lay-4">
+  
+    <div class="info">
+      <h5><i class="bi bi-file-earmark"></i> Info</h5>
+    <div>
+      <hr>
+      
+      <p>
+        <b> File name : </b> <span id="infoname">Name</span>      
+      </p>
+      <p> <b> File Type : </b> <span id="infotype">Type</span></p>
+      <p> <b> Created : </b> <span id="infodate">Date</span></p>
+    </div> 
+    </div>
+  </div>
 
-  <div class="lay lay-5">
+  <div class="lay lay-5">    
     <div class="container txtcenter my-3" >
+     
       <p>
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
           BookMark
@@ -173,17 +268,21 @@
         <h5 class="modal-title" id="exampleModalLabel">Login Form</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Login</button>
-      </div>
+      <form action="" method="post">{% csrf_token %}
+        <div class="modal-body">        
+            {% for log in login %}
+            {{log}}
+            {% endfor %}       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 {% endblock body %}
 {% block js %}
-<script src="{% static 'paperwebapp/js/pann.js' %}"></script>
+
 {% endblock js %}

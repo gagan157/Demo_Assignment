@@ -18,20 +18,22 @@
 }
 
 .lay-1{
+    position: relative;
     grid-row: 1/ span 6;
     grid-column: 1;
     color: white;
     background-color: rgb(32, 27, 27);
-    
+    width: 24%;
 }
 .lay-2{
     grid-column: 2/ span 4;
     /* grid-row: 1/ span 2; */
-    margin-left: -10px;
+    margin-left: -16vw;
 }
 .lay-3{
     grid-row: 2 / span 4;
     grid-column: 2 / span 3;
+    margin-left: -15vw;
     
 }
 .lay-4{
@@ -41,7 +43,7 @@
 }
 .lay-5{
     grid-column: 5 / span 1;
-    grid-row: 3 / span 2;
+    grid-row: 3 / span 1;
     margin-right: 4px;
 }
 .lay-6{
@@ -53,5 +55,6 @@
 #logleft{
     margin-left: auto;
 }
+
 
 

@@ -18,11 +18,25 @@
 .btncart{
     text-align: -webkit-right;
     text-align-last: justify;
+    display: flex;
+    justify-content: space-between;
 }
-.card{
-    width:  10rem;
-}
+
 
 .txtcenter{
     text-align: center;
+}
+
+.myicon{
+    color: white;
+}
+#fileicon{
+    color: black;
+}
+.info{
+    text-align: center;
+    padding: 10px;
+}
+.getinfo{
+    text-decoration: none;
 }
